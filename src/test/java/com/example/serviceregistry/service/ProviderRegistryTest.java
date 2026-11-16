@@ -1,15 +1,17 @@
 package com.example.serviceregistry.service;
 
+import com.example.serviceregistry.exception.ProviderConfigurationException;
 import com.example.serviceregistry.exception.ProviderNotFoundException;
 import com.example.serviceregistry.model.Provider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
-import org.mockito.junit.jupiter.MockitoExtension;
 import tools.jackson.databind.ObjectMapper;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -17,7 +19,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ExtendWith(MockitoExtension.class)
 public class ProviderRegistryTest {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -61,4 +62,12 @@ public class ProviderRegistryTest {
         assertEquals("provider-key-2", providerRegistry.getById("prov-2").apiKey());
         assertEquals("url-1", providerRegistry.getById("prov-1").url());
     }
- }
+
+    @Test
+    void shouldThrowExceptionWhenJsonIsInvalid() {
+        String invalidJson = "{not valid}";
+        InputStream is = new ByteArrayInputStream(invalidJson.getBytes(StandardCharsets.UTF_8));
+
+        assertThrows(ProviderConfigurationException.class, () -> providerRegistry.loadFromInputStream(is));
+    }
+}
