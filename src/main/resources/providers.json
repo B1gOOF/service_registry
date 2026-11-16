@@ -1,0 +1,12 @@
+[
+  {
+    "id" :  "provider1",
+    "url" :  "https://httpbin.org/status/200?dummy=",
+    "apiKey" :  "provider1-key"
+  },
+  {
+    "id" :  "provider2",
+    "url" :  "https://httpbin.org/status/404?dummy=",
+    "apiKey" :  "provider2-key"
+  }
+]
