@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
+/**
+ * Сервис для проверки доступности номера телефона у поставщиков
+ */
 @Service
 @RequiredArgsConstructor
 public class PhoneValidatorService {
@@ -13,6 +16,13 @@ public class PhoneValidatorService {
     private final ProviderRegistry providerRegistry;
     private final RestClient restClient;
 
+    /**
+     * Проверяет доступен ли номер телефона у поставщика
+     *
+     * @param providerId - идентификатор поставщика
+     * @param phone - номер телефона
+     * @return true, если номер доступен, иначе false
+     */
     public boolean isAvailable(String providerId, String phone) {
         Provider provider = providerRegistry.getById(providerId);
 

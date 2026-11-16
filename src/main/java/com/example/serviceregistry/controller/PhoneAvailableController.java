@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Контроллер для проверки доступности номеров
+ */
 @RestController
 @RequestMapping("/api/providers")
 @RequiredArgsConstructor

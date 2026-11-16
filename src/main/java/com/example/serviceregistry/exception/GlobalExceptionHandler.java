@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Map;
 
+/**
+ * Глобальный обработчик исключений для приведения к HTTP статусам
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
