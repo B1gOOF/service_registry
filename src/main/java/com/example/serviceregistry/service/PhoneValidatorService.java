@@ -18,7 +18,7 @@ public class PhoneValidatorService {
 
         try {
             StatusResponse body = restClient.get()
-                    .uri(provider.url())
+                    .uri(provider.url() + "/subscribers/{phone}", phone)
                     .header("X-API-KEY", provider.apiKey())
                     .retrieve()
                     .body(StatusResponse.class);
